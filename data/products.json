@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "urun_adi": "Laptop",
+        "fiyat": 25000.0,
+        "stokta_mi": true
+    },
+    {
+        "id": 2,
+        "urun_adi": "Klavye",
+        "fiyat": 750.5,
+        "stokta_mi": true
+    },
+    {
+        "id": 3,
+        "urun_adi": "Mouse Pad",
+        "fiyat": 120.0,
+        "stokta_mi": false
+    }
+]
