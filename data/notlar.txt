@@ -1,0 +1,6 @@
+Ahmet Yılmaz,85
+Ayşe Demir,42
+Mehmet Kaya,91
+Zeynep Can,55
+Ali Vural,30
+Fatma Şahin,76
