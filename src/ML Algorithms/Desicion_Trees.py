@@ -92,33 +92,70 @@ for pairidx, pair in enumerate([[0, 1], [0, 2], [0, 3], [1, 2], [1, 3], [2, 3]])
 
     plt.legend()
 
+# %%
+from sklearn.datasets import load_diabetes
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.metrics import mean_squared_error
 
+import numpy as np
+import matplotlib.pyplot as plt
 
+diabetes = load_diabetes()
 
+X = diabetes.data
+y = diabetes.target
 
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=42)
 
+# Decision Tree Regression Model
+tree_reg = DecisionTreeRegressor(max_depth=2, random_state=42).fit(X_train, y_train)
 
+y_pred = tree_reg.predict(X_test)
 
+mse = mean_squared_error(y_test, y_pred)
+print(f"Mse: {mse}")
+rmse = np.sqrt(mse)
+print(f"Rmse: {rmse}")
 
+std_dev = np.array(y_test).std()
+print(f"Gerçek değerlerin standart sapması: {std_dev}")
 
+plt.figure(figsize=(30, 25))
+plot_tree(tree_reg, filled=True, feature_names=diabetes.feature_names)
+plt.show()
 
+# %% Pratik
 
+from sklearn.tree import DecisionTreeRegressor, plot_tree
 
+import numpy as np
+import matplotlib.pyplot as plt
 
+# axis, sıralama ile alakalıdır. Axis = 0 olduğunda sıralama sütun bazında sıralama yapar.
+X = np.sort(5 * np.random.rand(80, 1), axis=0)
+y = np.sin(X).ravel()  # Ravel diziyi tek boyutlu hale getirir.
+y[::5] += 0.5 * (0.5 - np.random.rand(16))
 
+# plt.scatter(X, y)
 
+regr_1 = DecisionTreeRegressor(max_depth=2)
+regr_2 = DecisionTreeRegressor(max_depth=8)
+regr_1.fit(X, y)
+regr_2.fit(X, y)
 
+X_test = np.arange(0, 5, 0.05)[:, np.newaxis]  # np.newaxis ise arraye yeni bir boyut ekler.
+y_pred_1 = regr_1.predict(X_test)
+y_pred_2 = regr_2.predict(X_test)
 
+plt.figure()
+plt.scatter(X, y, color='red', label="data")
+plt.plot(X_test, y_pred_1, color='blue', label="depth 2", linewidth=2)
+plt.plot(X_test, y_pred_2, color='green', label="depth 7", linewidth=2)
+plt.xlabel('Data')
+plt.ylabel("Target")
+plt.legend()
 
-
-
-
-
-
-
-
-
-
-
-
-
+plt.figure(figsize=(30, 25))
+plot_tree(regr_1, filled=True, feature_names=['X Değeri'])
+plt.show()
